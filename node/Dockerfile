@@ -2,16 +2,19 @@ FROM node:18
 
 WORKDIR /usr/src/app
 
+ENV DOCKERIZE_VERSION v0.8.0
+
+RUN apt-get update \
+    && apt-get install -y wget \
+    && wget -O - https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz | tar xzf - -C /usr/local/bin \
+    && apt-get autoremove -yqq --purge wget && rm -rf /var/lib/apt/lists/*
+
 COPY package*.json ./
 
 RUN npm install
 
 COPY . .
 
-# RUN wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz \
-#     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.1.tar.gz \
-#     && rm dockerize-linux-amd64-v0.6.1.tar.gz
-
 EXPOSE 3000
 
-CMD ["node", "index.js"]
+# CMD ["node", "index.js"]

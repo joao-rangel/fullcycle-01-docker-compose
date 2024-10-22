@@ -7,8 +7,8 @@ const app = express();
 const dbConfig = {
   host: 'db',
   user: 'root',
-  password: 'root',
-  database: 'nodedb'
+  password: process.env.MYSQL_ROOT_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
 };
 
 const connection = mysql.createConnection(dbConfig);
@@ -36,5 +36,5 @@ app.get('/', (_req, res) => {
 });
 
 const port = 3000;
-app.listen(port, () => console.log('Rodando na porta ' + port))
+app.listen(port, () => console.log('Server listening on port: ' + port))
 
