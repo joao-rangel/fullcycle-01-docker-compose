@@ -14,7 +14,7 @@ cd fullcycle-02-docker-compose
 
 3. Run docker compose
 ```
-docker compose up -d --build
+docker compose up
 ```
 
 4. Access the application in the browser
